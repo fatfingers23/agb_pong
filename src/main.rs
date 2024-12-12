@@ -34,7 +34,8 @@ const BALL: &Tag = GRAPHICS.tags().get("Ball");
 #[agb::entry]
 fn main(mut gba: agb::Gba) -> ! {
     // Get the object manager
-    let object = gba.display.object.get();
+    let object = gba.display.object.get_managed();
+
     let mut input = agb::input::ButtonController::new();
 
     let mut ball: Ball = Ball::new(&object);
@@ -120,7 +121,6 @@ fn main(mut gba: agb::Gba) -> ! {
         middle: Entity<'a>,
         bottom: Entity<'a>,
         velocity: Vector2D<i32>,
-        which_side: Side,
     }
 
     /// Impl of paddle to allow for methods to interact with the sprite and setup
@@ -170,7 +170,6 @@ fn main(mut gba: agb::Gba) -> ! {
                 top: paddle_top,
                 middle: paddle_middle,
                 bottom: paddle_bottom,
-                which_side,
                 velocity: (0, 0).into(),
             }
         }
